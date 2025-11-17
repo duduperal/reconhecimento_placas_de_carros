@@ -1,0 +1,21 @@
+# Reconhecimento de Placas - Dependências
+# Python 3.8+
+
+# Processamento de imagens e visão computacional
+opencv-python==4.8.1.78
+opencv-contrib-python==4.8.1.78
+
+# OCR (Optical Character Recognition)
+pytesseract==0.3.10
+
+# Computação numérica
+numpy==1.24.3
+
+# Interface gráfica (opcional - para versão Streamlit)
+streamlit==1.28.1
+
+# Processamento de imagens
+Pillow==10.1.0
+
+# Utilitários
+python-dateutil==2.8.2
