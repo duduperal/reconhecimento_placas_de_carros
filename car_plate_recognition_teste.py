@@ -86,7 +86,6 @@ def detect_plate_candidates(frame):
     return candidates
 
 # ---------- MAIN ----------
-# ---------- MAIN ----------
 def main():
     import os
     if SAVE_CAPTURES:
@@ -99,6 +98,7 @@ def main():
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 
+
     fps_timer = time.time()
     frame_count = 0
 
@@ -106,7 +106,6 @@ def main():
     last_text = ""
     text_counter = 0
     stable_text = ""
-    last_saved_plate = ""  # Variável para evitar salvar o mesmo frame toda hora
 
     while True:
         ret, frame = cap.read()
@@ -118,9 +117,7 @@ def main():
         orig = frame.copy()
         candidates = detect_plate_candidates(frame)
 
-        # Variável para guardar a melhor placa detectada neste frame
-        best_plate_info = None  # (texto, (x,y,w,h))
-
+        plates_found = []
         for (x, y, w, h) in candidates:
             roi = orig[y:y+h, x:x+w]
             # converter para cinza e pré-processar
@@ -132,10 +129,7 @@ def main():
             cleaned = clean_text(ocr_result)
 
             if is_valid_plate(cleaned):
-                # Encontrou uma placa válida, armazena para potencial desenho
-                best_plate_info = (cleaned, (x,y,w,h))
-
-                # Lógica de estabilidade:
+                # estabilidade: só aceita se aparecer igual por alguns frames seguidos
                 if cleaned == last_text:
                     text_counter += 1
                 else:
@@ -144,44 +138,22 @@ def main():
 
                 if text_counter >= 3:  # apareceu igual por 3 frames
                     stable_text = cleaned
-                
-                # Se acharmos uma placa válida, paramos o loop para não processar outros candidatos 
-                # que podem ser apenas ruído ou a mesma placa (apenas um contorno diferente)
-                break 
 
-        
-        # --- Lógica de Desenho e Salvamento (FORA do loop de candidatos) ---
-        
-        # Desenha apenas se houver uma placa estável
-        if stable_text and best_plate_info:
-            plate_text, (x, y, w, h) = best_plate_info
-            
-            # Desenha o único retângulo verde
-            cv2.rectangle(frame, (x,y), (x+w, y+h), (0,255,0), 2)
-            
-            # Desenha o texto estável
-            cv2.putText(frame, stable_text, (x, y-10),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0,255,0), 2)
+                plates_found.append((cleaned, (x,y,w,h)))
+                cv2.rectangle(frame, (x,y), (x+w, y+h), (0,255,0), 2)
+                cv2.putText(frame, stable_text if stable_text else cleaned, (x, y-10),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0,255,0), 2)
 
 
-            # Opcional: salvar captura APENAS se o texto estável mudou
-            if SAVE_CAPTURES and stable_text != last_saved_plate:
-                ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-                fname = f"{CAPTURE_DIR}/plate_{stable_text}_{ts}.png"
-                cv2.imwrite(fname, orig)
-                print(f"[SALVO] {fname}")
-                last_saved_plate = stable_text # Atualiza a última placa salva
-        
-        else:
-             # Se a placa não estiver estável ou não houver candidato neste frame
-             # Reinicia a estabilidade se nada foi detectado ou se a estabilidade foi perdida
-             if not best_plate_info:
-                 text_counter = 0 # Zera a contagem
-                 last_text = ""
-                 stable_text = "" # Remove o texto estável se não foi encontrado nada
+                # opcional: salvar captura
+                if SAVE_CAPTURES:
+                    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+                    fname = f"{CAPTURE_DIR}/plate_{cleaned}_{ts}.png"
+                    cv2.imwrite(fname, orig)
+                    print(f"[SALVO] {fname}")
 
         # mostrar aviso se nada detectado (opcional)
-        if not stable_text:
+        if not plates_found:
             cv2.putText(frame, "Nenhuma placa detectada", (10,30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0,0,255), 2)
 
         # mostrar FPS aproximado
