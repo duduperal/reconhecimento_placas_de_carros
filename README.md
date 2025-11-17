@@ -256,7 +256,7 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 ## 👨‍💻 Autor
 
-Desenvolvido como projeto acadêmico de Visão Computacional.
+Desenvolvido como projeto acadêmico de Visão Computacional por José Eduardo, João Pedro, Karla Vitória e Cauã Pereira.
 
 ## 🙏 Agradecimentos
 
@@ -268,7 +268,6 @@ Desenvolvido como projeto acadêmico de Visão Computacional.
 
 Para dúvidas ou sugestões:
 - Abra uma [Issue](https://github.com/seu-usuario/reconhecimento-placas/issues)
-- Entre em contato através do email: seu-email@exemplo.com
 
 ---
 
