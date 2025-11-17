@@ -128,11 +128,6 @@ reconhecimento-placas/
 ├── captures/                    # Imagens capturadas (criada automaticamente)
 │   └── plate_*.png
 │
-├── docs/                        # Documentação adicional
-│   └── RoteiroDoTrabalho.docx
-│
-└── examples/                    # Exemplos e imagens de teste
-    └── sample_plates/
 ```
 
 ## 🔧 Configurações Avançadas
