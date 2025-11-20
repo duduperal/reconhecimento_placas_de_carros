@@ -7,24 +7,20 @@ import time
 from datetime import datetime
 
 # ---------- CONFIGURAÇÕES ----------
-# Se estiver no Windows, defina o caminho do tesseract, exemplo:
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
-# Se não precisar, comente a linha abaixo.
-# pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
-# Config do Tesseract: usar psm 7 (uma linha de texto) e whitelist (apenas letras e números)
+
 TESSERACT_CONFIG = '--oem 3 --psm 7 -c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 
 
 # Regex para filtrar placa brasileira (padrão antigo AAA9999 ou padrão Mercosul AAA9A99)
-# Ajuste conforme país. Aqui tentamos aceitar sequências alfanuméricas com 5-8 caracteres.
 PLATE_REGEX = re.compile(r'([A-Z0-9]{5,8})')
 
-# Salvar imagens detectadas em 'captures/' quando for detectada uma placa
+# Salvar imagens detectadas em 'captures/'
 SAVE_CAPTURES = True
 CAPTURE_DIR = "captures"
 
-# ---------- FUNÇÕES AUXILIARES ----------
+
 def clean_text(text):
     """Remove caracteres indesejados e retorna uppercase."""
     if not text:
@@ -43,7 +39,7 @@ def is_valid_plate(text):
 
 def preprocess_plate(img_gray):
     """Melhora contraste e binariza para OCR com menos ruído."""
-    # aumenta contraste com CLAHE
+    # aumenta contraste
     clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
     cl = clahe.apply(img_gray)
 
@@ -60,7 +56,6 @@ def preprocess_plate(img_gray):
 
 
 def detect_plate_candidates(frame):
-    """Detecta regiões candidatas a placa via contornos e filtros de proporção."""
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     # equalizar e reduzir ruído
     gray = cv2.GaussianBlur(gray, (5,5), 0)
@@ -85,14 +80,12 @@ def detect_plate_candidates(frame):
                     candidates.append((x, y, w, h))
     return candidates
 
-# ---------- MAIN ----------
-# ---------- MAIN ----------
 def main():
     import os
     if SAVE_CAPTURES:
         os.makedirs(CAPTURE_DIR, exist_ok=True)
 
-    cap = cv2.VideoCapture(0)  # índice 0 normalmente é webcam integrada
+    cap = cv2.VideoCapture(0)  
     if not cap.isOpened():
         print("Erro: não foi possível abrir a webcam. Verifique o índice (0/1) ou drivers.")
         return
@@ -106,7 +99,7 @@ def main():
     last_text = ""
     text_counter = 0
     stable_text = ""
-    last_saved_plate = ""  # Variável para evitar salvar o mesmo frame toda hora
+    last_saved_plate = ""  
 
     while True:
         ret, frame = cap.read()
@@ -119,7 +112,7 @@ def main():
         candidates = detect_plate_candidates(frame)
 
         # Variável para guardar a melhor placa detectada neste frame
-        best_plate_info = None  # (texto, (x,y,w,h))
+        best_plate_info = None  
 
         for (x, y, w, h) in candidates:
             roi = orig[y:y+h, x:x+w]
