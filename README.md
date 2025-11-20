@@ -14,27 +14,27 @@ Sistema inteligente de detecção e reconhecimento automático de placas veicula
 
 ---
 
-## 📋 Sobre o Projeto
+##  Sobre o Projeto
 
 Este sistema captura vídeo em tempo real através da webcam, detecta automaticamente regiões candidatas a placas veiculares, extrai os caracteres usando OCR e valida o formato das placas brasileiras (padrões antigo **AAA9999** e Mercosul **AAA9A99**).
 
-### ✨ Características Principais
+###  Características Principais
 
-- 📹 **Captura em tempo real** via webcam
-- 🎯 **Detecção automática** usando análise de contornos
-- 🔍 **Pré-processamento avançado** (CLAHE, filtros bilaterais, binarização OTSU)
-- 🤖 **OCR otimizado** com Tesseract
-- ✅ **Validação inteligente** de placas brasileiras
-- 🛡️ **Sistema de estabilização** anti-falsos positivos
-- 💾 **Salvamento automático** de capturas com timestamp
-- ⚡ **Exibição de FPS** em tempo real
-- 🎨 **Duas interfaces disponíveis**: OpenCV e Streamlit
+-  **Captura em tempo real** via webcam
+-  **Detecção automática** usando análise de contornos
+-  **Pré-processamento avançado** (CLAHE, filtros bilaterais, binarização OTSU)
+-  **OCR otimizado** com Tesseract
+-  **Validação inteligente** de placas brasileiras
+-  **Sistema de estabilização** anti-falsos positivos
+-  **Salvamento automático** de capturas com timestamp
+-  **Exibição de FPS** em tempo real
+-  **Duas interfaces disponíveis**: OpenCV e Streamlit
 
 ---
 
-## 🎭 Versões Disponíveis
+##  Versões Disponíveis
 
-### 🖥️ Versão OpenCV (Desktop)
+###  Versão OpenCV (Desktop)
 **Arquivo:** `car_plate_recognition.py`
 
 Interface tradicional com janela OpenCV, ideal para:
@@ -43,7 +43,7 @@ Interface tradicional com janela OpenCV, ideal para:
 - ✅ Processamento local otimizado
 - ✅ Controle total via teclado (ESC para sair)
 
-### 🌐 Versão Streamlit (Web)
+###  Versão Streamlit (Web)
 **Arquivo:** `car_plate_recognition_streamlit.py`
 
 Interface web moderna e interativa, ideal para:
@@ -67,7 +67,7 @@ Interface web moderna e interativa, ideal para:
 
 ---
 
-## 📦 Pré-requisitos
+##  Pré-requisitos
 
 ### 1. Python 3.8+
 ```bash
@@ -97,7 +97,7 @@ Webcam funcional conectada ao computador
 
 ---
 
-## 🚀 Instalação
+##  Instalação
 
 ### 1️⃣ Clone o repositório
 ```bash
@@ -135,9 +135,9 @@ pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tessera
 
 ---
 
-## 💻 Como Usar
+##  Como Usar
 
-### 🖥️ Versão OpenCV (Recomendada)
+###  Versão OpenCV (Recomendada)
 
 ```bash
 python car_plate_recognition.py
@@ -157,7 +157,7 @@ captures/
 └── ...
 ```
 
-### 🌐 Versão Streamlit
+###  Versão Streamlit
 
 ```bash
 streamlit run car_plate_recognition_streamlit.py
@@ -167,7 +167,7 @@ A interface web abrirá automaticamente no navegador em `http://localhost:8501`
 
 ---
 
-## 📊 Funcionamento
+##  Funcionamento
 
 ```mermaid
 graph LR
@@ -182,7 +182,7 @@ graph LR
     H -->|Não| A
 ```
 
-### 🔍 Pipeline de Processamento
+###  Pipeline de Processamento
 
 1. **Captura** - Frame da webcam (640x480)
 2. **Detecção** - Análise de bordas (Canny) + contornos retangulares
@@ -199,7 +199,7 @@ graph LR
 
 ---
 
-## ⚙️ Configurações Avançadas
+##  Configurações Avançadas
 
 ### Ajustar Detecção
 
@@ -235,7 +235,7 @@ CAPTURE_DIR = "minhas_capturas"  # Personalizar pasta
 
 ---
 
-## 🎯 Desempenho
+##  Desempenho
 
 | Métrica | Valor |
 |---------|-------|
@@ -252,9 +252,9 @@ CAPTURE_DIR = "minhas_capturas"  # Personalizar pasta
 
 ---
 
-## 🐛 Solução de Problemas
+##  Solução de Problemas
 
-### ❌ Erro: "Não foi possível abrir a webcam"
+###  Erro: "Não foi possível abrir a webcam"
 
 ```python
 # Tente outros índices
@@ -269,7 +269,7 @@ for i in range(5):
         cap.release()
 ```
 
-### ❌ OCR não reconhece
+###  OCR não reconhece
 
 **Soluções:**
 - ✅ Verifique instalação do Tesseract
@@ -278,7 +278,7 @@ for i in range(5):
 - ✅ Limpe a lente da câmera
 - ✅ Reduza tremores (fixe a câmera)
 
-### ❌ Muitos falsos positivos
+###  Muitos falsos positivos
 
 ```python
 # Aumente a estabilização
@@ -291,7 +291,7 @@ if w < 80 or h < 20:  # Mais restritivo
 if 2.5 < aspect_ratio < 5.5:  # Intervalo menor
 ```
 
-### ❌ Performance baixa
+###  Performance baixa
 
 ```python
 # Reduza resolução
@@ -326,18 +326,18 @@ reconhecimento-placas/
 
 ---
 
-## 🚀 Melhorias Futuras
+##  Melhorias Futuras
 
-- [ ] 🤖 **Deep Learning** (YOLO/TensorFlow) para maior precisão
-- [ ] 🗄️ **Banco de dados** (SQLite) para histórico
-- [ ] 🌍 **API REST** (FastAPI) para integração
-- [ ] 📹 **Múltiplas câmeras** simultâneas
-- [ ] 🎥 **Processamento de vídeos** gravados
-- [ ] 🔔 **Notificações** (Discord/Telegram) em tempo real
-- [ ] 🌐 **Placas internacionais** (EU, USA)
-- [ ] 📊 **Dashboard** com estatísticas
-- [ ] 🐳 **Docker** para deploy facilitado
-- [ ] ☁️ **Cloud deploy** (AWS/GCP)
+- [ ]  **Deep Learning** (YOLO/TensorFlow) para maior precisão
+- [ ]  **Banco de dados** (SQLite) para histórico
+- [ ]  **API REST** (FastAPI) para integração
+- [ ]  **Múltiplas câmeras** simultâneas
+- [ ]  **Processamento de vídeos** gravados
+- [ ]  **Notificações** (Discord/Telegram) em tempo real
+- [ ]  **Placas internacionais** (EU, USA)
+- [ ]  **Dashboard** com estatísticas
+- [ ]  **Docker** para deploy facilitado
+- [ ]  **Cloud deploy** (AWS/GCP)
 
 ---
 
@@ -345,11 +345,11 @@ reconhecimento-placas/
 
 Contribuições são muito bem-vindas! Para contribuir:
 
-1. 🍴 Fork o projeto
-2. 🔀 Crie uma branch (`git checkout -b feature/MinhaFeature`)
-3. 💾 Commit suas mudanças (`git commit -m 'Adiciona nova feature'`)
-4. 📤 Push para a branch (`git push origin feature/MinhaFeature`)
-5. 🔃 Abra um Pull Request
+1.  Fork o projeto
+2.  Crie uma branch (`git checkout -b feature/MinhaFeature`)
+3.  Commit suas mudanças (`git commit -m 'Adiciona nova feature'`)
+4.  Push para a branch (`git push origin feature/MinhaFeature`)
+5.  Abra um Pull Request
 
 **Áreas que precisam de ajuda:**
 - Melhorar detecção em baixa iluminação
@@ -360,7 +360,7 @@ Contribuições são muito bem-vindas! Para contribuir:
 
 ---
 
-## 📄 Licença
+##  Licença
 
 Este projeto está sob a licença **MIT**. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
@@ -370,13 +370,13 @@ MIT License - Você pode usar, modificar e distribuir livremente
 
 ---
 
-## 👨‍💻 Autor
+##  Autor
 
 Desenvolvido como projeto de **Visão Computacional** e **Processamento de Imagens** por José Eduardo, Karla Vitório, João Pedro e Cauã Pereira.
 
 ---
 
-## 🙏 Agradecimentos
+##  Agradecimentos
 
 - [OpenCV Community](https://opencv.org/) - Framework de visão computacional
 - [Tesseract OCR](https://github.com/tesseract-ocr/tesseract) - Engine de OCR
@@ -385,13 +385,13 @@ Desenvolvido como projeto de **Visão Computacional** e **Processamento de Image
 
 ---
 
-## 📞 Contato & Suporte
+##  Contato & Suporte
 
-💬 **Dúvidas?** Abra uma [Issue](https://github.com/seu-usuario/reconhecimento-placas/issues)
+ **Dúvidas?** Abra uma [Issue](https://github.com/seu-usuario/reconhecimento-placas/issues)
 
-🐛 **Bugs:** Use a aba [Issues](https://github.com/seu-usuario/reconhecimento-placas/issues)
+ **Bugs:** Use a aba [Issues](https://github.com/seu-usuario/reconhecimento-placas/issues)
 
-💡 **Sugestões:** Pull Requests são sempre bem-vindos!
+ **Sugestões:** Pull Requests são sempre bem-vindos!
 
 ---
 
