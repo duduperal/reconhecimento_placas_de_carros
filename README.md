@@ -372,7 +372,7 @@ MIT License - Você pode usar, modificar e distribuir livremente
 
 ##  Autor
 
-Desenvolvido como projeto de **Visão Computacional** e **Processamento de Imagens** por José Eduardo, Karla Vitório, João Pedro e Cauã Pereira.
+Desenvolvido como projeto de **Visão Computacional** e **Processamento de Imagens** por José Eduardo, Karla Vitória, João Pedro e Cauã Pereira.
 
 ---
 
